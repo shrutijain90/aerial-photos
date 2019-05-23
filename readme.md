@@ -6,3 +6,5 @@ There are 3 files in this repository:
 1) merge2_v6.m - This is the function employed by the other 2 files
 2) making_strips.m - Use this file to stitch images from right to left
 3) making_strips_geolocated.m - Use this file to stitch geolocated images from right to left, while updating geolocation indices. 
+
+Note that this code is written for black and white images. But with slight modifications, it can be made to work for RGB images as well.
