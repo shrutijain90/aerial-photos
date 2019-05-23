@@ -1,12 +1,4 @@
 function ij = merge2_v6(x1,x2,key_size,j_begin,i_travel,j_travel,hor,res)
-%Merges 2 images horizontally, x2 (left) is added to x1 (right)
-%Chooses a particular region to find best match
-%hor refers to starting point (for matching) on image 1 
-%res = factor by which resolution should be declined
-%key_size: image_size/~3 (image_size after reducing resolution)
-%j_begin: image_size/2 + image_size/~11.5 (image_size after reducing resolution)
-%i_travel: image_size/~7.5 (image_size after reducing resolution) [odd]
-%j_travel: image_size/~3.5 (image_size after reducing resolution) [odd]
 
 x1 = imresize(x1,1/res);
 x2 = imresize(x2,1/res);
