@@ -9,15 +9,17 @@ clear;
 folder = '/shares/lab/sjain/Data/Barbados/1950/undistort';
 
 % parameters for co-registration
-hor = 1; % hor refers to starting point (for matching) on image 1 
-res = 3; % factor by which resolution should be declined (co-registration)
-key_size = 300; % image_size/~3 (image_size after reducing resolution)
-j_begin = 530; % image_size/2 + image_size/~11.5 (image_size after reducing resolution)
-i_travel = 121; % image_size/~7.5 (image_size after reducing resolution) [odd]
-j_travel = 221; % image_size/~3.5 (image_size after reducing resolution) [odd]
-thr = 800; % feature recognition threshold (1000 is best, but least number of features)
-res2 = 3; % factor by which resolution should be declined (feature recognition)
+n = 2604; % size of each image
+res = 3; % factor by which resolution of images should be declined while matching
+key_size = 300; % size of key in the downsampled images
+j_begin = 530; % horizontal index of the point where the key must begin on the downsampled left image
+hor = 1; % hor refers to starting point (for matching) on image on the right
+i_travel = 121; % vertical distance to search over in the downsampled right image
+j_travel = 221; % horizontal distance to search over in the downsampled right image
+thr = 800; % feature recognition threshold (1000 is best, but least number of features) - to be done pairwise before coregistration
+res2 = 3; % factor by which resolution should be declined while performing feature recognition
 blend = 200; % horizontal length for blending - to create a seamless merge
+ncores = 10; % number of cores for parallel processing
 
 % images in strip
 right = 0074; % righmost image
@@ -29,10 +31,6 @@ output_file_name = '/shares/lab/sjain/Output/Barbados/1950/strips/8';
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Leave these fields as is. Do not edit.
-code_folder = pwd;
-cd(folder)
-load('n.mat')
-cd(code_folder)
 S = dir(fullfile(folder,'*.tif')); 
 
 Images = uint8(zeros(n,n,abs(right-left)+1));
@@ -117,7 +115,7 @@ end
 
 ij = zeros(a(3)-1,2);
 
-parpool(10);
+parpool(ncores);
 
 Images1 = Images(:,:,1:a(3)-1);
 Images2 = Images(:,:,2:a(3));
