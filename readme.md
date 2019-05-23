@@ -1,4 +1,4 @@
-#coregistration 
+# coregistration  
 
 This repository can help you create a seamless panaromic image out of several overlapping images using a technique called image coregistration. This is different from typical image stitching algorithms such as SURF or SIFT, in that it uses a 'key' to match images instead of features. This offers more controlf over the merge, and can be useful when you want to avoid distortion caused by affine transformations. 
 
